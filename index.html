@@ -239,10 +239,10 @@
     </div>
 
     <!-- Email Form (WordPress Friendly) -->
-    <form class="email-form" method="post" action="#">
-      <input type="email" name="email" placeholder="Enter your email" required>
-      <button type="submit">Notify Me</button>
-    </form>
+   <form class="email-form" onsubmit="return handleSubmit(event)">
+  <input type="email" id="email" name="email" placeholder="Enter your email" required>
+  <button type="submit">Notify Me</button>
+</form>
 
     <footer>
       © <span id="year"></span> Krishva Enterprise. All Rights Reserved.
@@ -251,6 +251,27 @@
   </div>
 
   <script>
+    function handleSubmit(event) {
+  event.preventDefault(); // page reload stop
+
+  const email = document.getElementById("email").value;
+
+  // Email validation regex
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+  if (!emailPattern.test(email)) {
+    alert("❌ Please enter a valid email address");
+    return false;
+  }
+
+  // Success alert
+  alert("✅ Thank you! You will be notified when we launch 🚀");
+
+  // Optional: clear input
+  document.getElementById("email").value = "";
+
+  return false;
+}
     // ===== COUNTDOWN DATE (EDIT THIS DATE) =====
     const launchDate = new Date("May 1, 2026 12:00:00").getTime();
 
